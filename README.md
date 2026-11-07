@@ -93,7 +93,7 @@ retailops-postgres/
 * L'évaluation d'`evaluation/verifier.sh` du kit n'était pas fourni, le script `scripts/self_check.sh` en est un équivalent maison.
 ---
 
-## [**Le rapport est ci-joint**](rapport/rapport.pdf)
+## [**Le rapport est ci-joint**](./rapport/Rapport-RetailOps.pdf)
 ____
 > #### Projet de groupe - Master IA/Data
 > Esperence DAYE
