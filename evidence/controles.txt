@@ -1,0 +1,31 @@
+      t      | count 
+-------------+-------
+ customers   |   300
+ products    |    80
+ orders      |  5000
+ order_items |  9989
+(4 rows)
+
+ email | count 
+-------+-------
+(0 rows)
+
+ orphelins 
+-----------
+         0
+(1 row)
+
+ orphelins_orders 
+------------------
+                0
+(1 row)
+
+ sku | count 
+-----+-------
+(0 rows)
+
+ orphelins_items 
+-----------------
+               0
+(1 row)
+

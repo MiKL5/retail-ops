@@ -1,0 +1,29 @@
+CREATE EXTENSION
+CREATE EXTENSION
+ALTER SYSTEM
+ALTER SYSTEM
+ALTER SYSTEM
+ALTER SYSTEM
+CREATE ROLE
+GRANT
+ALTER SYSTEM
+ pg_reload_conf 
+----------------
+ t
+(1 row)
+
+  shared_preload_libraries  
+----------------------------
+ pgaudit,pg_stat_statements
+(1 row)
+
+   pgaudit.log    
+------------------
+ ddl, role, write
+(1 row)
+
+ extname | extversion 
+---------+------------
+ pgaudit | 18.0
+(1 row)
+

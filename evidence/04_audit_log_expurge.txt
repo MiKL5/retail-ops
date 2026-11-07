@@ -1,0 +1,7 @@
+### Extrait pgAudit depuis 2026-11-02T13:25:51Z — emails et mots de passe masqués
+2026-11-02 13:25:51.964 UTC [493] postgres@retailops/psql LOG:  AUDIT: SESSION,1,1,DDL,CREATE EXTENSION,,,CREATE EXTENSION IF NOT EXISTS pgaudit,<not logged>
+2026-11-02 13:25:51.968 UTC [493] postgres@retailops/psql LOG:  AUDIT: SESSION,2,1,ROLE,ALTER ROLE,,,"ALTER ROLE analyst_login SET pgaudit.log = 'read, write, ddl'",<not logged>
+2026-11-02 13:25:52.243 UTC [500] postgres@retailops/psql LOG:  AUDIT: SESSION,1,1,DDL,CREATE TABLE,TABLE,public.audit_probe,CREATE TABLE public.audit_probe(id int),<not logged>
+2026-11-02 13:25:52.244 UTC [500] postgres@retailops/psql LOG:  AUDIT: SESSION,2,1,DDL,DROP TABLE,TABLE,public.audit_probe,DROP TABLE public.audit_probe,<not logged>
+2026-11-02 13:25:52.508 UTC [507] app_login@retailops/psql LOG:  AUDIT: SESSION,1,1,WRITE,UPDATE,,,UPDATE retail.orders SET status='paid' WHERE order_id=1,<not logged>
+2026-11-02 13:25:52.887 UTC [514] analyst_login@retailops/psql LOG:  AUDIT: SESSION,1,1,READ,SELECT,,,SELECT count(*) FROM retail.customers,<not logged>

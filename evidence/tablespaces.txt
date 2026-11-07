@@ -1,0 +1,6 @@
+  spcname   | taille 
+------------+--------
+ pg_default | 32 MB
+ pg_global  | 572 kB
+(2 rows)
+

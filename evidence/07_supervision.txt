@@ -1,0 +1,56 @@
+CREATE EXTENSION
+=== 1. Connexions (état et taux d'utilisation) ===
+ state  | count 
+--------+-------
+ active |     1
+(1 row)
+
+ connexions | max_connections | pct_utilise 
+------------+-----------------+-------------
+          1 |             100 |         1.0
+(1 row)
+
+=== 2. Verrous : sessions bloquées et bloqueurs ===
+ pid | usename | application_name | attente | bloque_par | requete 
+-----+---------+------------------+---------+------------+---------
+(0 rows)
+
+=== 3. Deadlocks, rollbacks, cache hit (par base) ===
+       datname        | deadlocks | xact_commit | xact_rollback | cache_hit_pct 
+----------------------+-----------+-------------+---------------+---------------
+ retailops            |         0 |         220 |            11 |         99.32
+ retail_restore_check |         0 |          81 |             0 |         99.93
+(2 rows)
+
+=== 4. Volume ===
+       datname        | taille  
+----------------------+---------
+ retailops            | 9465 kB
+ retail_restore_check | 9206 kB
+(2 rows)
+
+=== 5. VACUUM : ratio de lignes mortes ===
+   relname   | n_live_tup | n_dead_tup | pct_mortes |        last_autovacuum        
+-------------+------------+------------+------------+-------------------------------
+ order_items |       9989 |          0 |       0.00 | 2026-11-02 13:19:01.044043+00
+ orders      |       5000 |          0 |       0.00 | 2026-11-02 13:19:01.076275+00
+ products    |         80 |          0 |       0.00 | 
+ customers   |        300 |          0 |       0.00 | 
+(4 rows)
+
+=== 6. Requêtes les plus coûteuses (pg_stat_statements) ===
+ calls | moy_ms  | total_ms |                                     requete                                      
+-------+---------+----------+----------------------------------------------------------------------------------
+     2 | 1624.13 |   3248.3 | UPDATE retail.orders SET status=status WHERE order_id=$1
+     1 |  188.97 |    189.0 | EXPLAIN (ANALYZE, BUFFERS) INSERT INTO perf.w_idx SELECT g, (g % $1) + $2, times
+     1 |  188.44 |    188.4 | EXPLAIN (ANALYZE, BUFFERS) INSERT INTO perf.w_idx SELECT g, (g % $1) + $2, times
+     1 |  168.47 |    168.5 | EXPLAIN (ANALYZE, BUFFERS) INSERT INTO perf.w_noidx SELECT g, (g % $1) + $2, tim
+     1 |  167.43 |    167.4 | EXPLAIN (ANALYZE, BUFFERS) INSERT INTO perf.w_noidx SELECT g, (g % $1) + $2, tim
+(5 rows)
+
+=== 7. Archivage WAL ===
+ archived_count | failed_count |    last_archived_wal     |      last_archived_time       | last_failed_time 
+----------------+--------------+--------------------------+-------------------------------+------------------
+              9 |            0 | 000000010000000000000009 | 2026-11-02 13:32:06.352407+00 | 
+(1 row)
+

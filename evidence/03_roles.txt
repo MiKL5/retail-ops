@@ -1,0 +1,39 @@
+SET
+CREATE ROLE
+CREATE ROLE
+CREATE ROLE
+CREATE ROLE
+ALTER ROLE
+ALTER ROLE
+GRANT ROLE
+GRANT ROLE
+REVOKE
+GRANT
+GRANT
+GRANT
+GRANT
+GRANT
+ALTER DEFAULT PRIVILEGES
+RESET
+=== Rôles ===
+    rolname    | rolcanlogin | rolsuper | rolcreatedb | rolcreaterole | rolconnlimit 
+---------------+-------------+----------+-------------+---------------+--------------
+ analyst_login | t           | f        | f           | f             |           10
+ app_login     | t           | f        | f           | f             |           20
+ retail_ro     | f           | f        | f           | f             |           -1
+ retail_rw     | f           | f        | f           | f             |           -1
+(4 rows)
+
+=== Privilèges effectifs sur les tables ===
+    rolname    | table_name  | sel | ins | upd | del 
+---------------+-------------+-----+-----+-----+-----
+ analyst_login | customers   | t   | f   | f   | f
+ analyst_login | order_items | t   | f   | f   | f
+ analyst_login | orders      | t   | f   | f   | f
+ analyst_login | products    | t   | f   | f   | f
+ app_login     | customers   | t   | f   | f   | f
+ app_login     | order_items | t   | t   | t   | f
+ app_login     | orders      | t   | t   | t   | f
+ app_login     | products    | t   | f   | f   | f
+(8 rows)
+

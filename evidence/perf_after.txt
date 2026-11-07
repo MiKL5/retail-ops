@@ -1,0 +1,96 @@
+### APRÈS optimisation — 2026-11-02T13:32:04Z
+--- Contexte de mesure ---
+                                                       version                                                        
+----------------------------------------------------------------------------------------------------------------------
+ PostgreSQL 17.11 (Debian 17.11-1.pgdg13+2) on x86_64-pc-linux-gnu, compiled by gcc (Debian 14.2.0-19) 14.2.0, 64-bit
+(1 row)
+
+ shared_buffers | work_mem | orders | items 
+----------------+----------+--------+-------
+ 256MB          | 4MB      |   5000 |  9989
+(1 row)
+
+           indexname            
+--------------------------------
+ customers_email_key
+ customers_pkey
+ idx_order_items_order_id
+ idx_orders_customer_ordered_at
+ order_items_pkey
+ orders_pkey
+ products_pkey
+ products_sku_key
+(8 rows)
+
+--- Exécution 1 (cache à chaud partiel) ---
+                                                                            QUERY PLAN                                                                            
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Sort  (cost=82.45..82.47 rows=7 width=49) (actual time=0.253..0.256 rows=9 loops=1)
+   Sort Key: o.ordered_at DESC
+   Sort Method: quicksort  Memory: 25kB
+   Buffers: shared hit=35 read=9
+   I/O Timings: shared read=0.060
+   ->  GroupAggregate  (cost=82.09..82.36 rows=7 width=49) (actual time=0.212..0.230 rows=9 loops=1)
+         Group Key: o.order_id
+         Buffers: shared hit=32 read=9
+         I/O Timings: shared read=0.060
+         ->  Sort  (cost=82.09..82.13 rows=14 width=27) (actual time=0.196..0.199 rows=15 loops=1)
+               Sort Key: o.order_id
+               Sort Method: quicksort  Memory: 25kB
+               Buffers: shared hit=32 read=9
+               I/O Timings: shared read=0.060
+               ->  Nested Loop  (cost=4.64..81.83 rows=14 width=27) (actual time=0.067..0.181 rows=15 loops=1)
+                     Buffers: shared hit=29 read=9
+                     I/O Timings: shared read=0.060
+                     ->  Bitmap Heap Scan on orders o  (cost=4.35..23.45 rows=7 width=17) (actual time=0.046..0.061 rows=9 loops=1)
+                           Recheck Cond: ((customer_id = 42) AND (ordered_at >= '2026-01-01'::date))
+                           Heap Blocks: exact=9
+                           Buffers: shared hit=9 read=2
+                           I/O Timings: shared read=0.017
+                           ->  Bitmap Index Scan on idx_orders_customer_ordered_at  (cost=0.00..4.35 rows=7 width=0) (actual time=0.035..0.036 rows=9 loops=1)
+                                 Index Cond: ((customer_id = 42) AND (ordered_at >= '2026-01-01'::date))
+                                 Buffers: shared read=2
+                                 I/O Timings: shared read=0.017
+                     ->  Index Scan using idx_order_items_order_id on order_items oi  (cost=0.29..8.32 rows=2 width=14) (actual time=0.011..0.012 rows=2 loops=9)
+                           Index Cond: (order_id = o.order_id)
+                           Buffers: shared hit=20 read=7
+                           I/O Timings: shared read=0.042
+ Planning:
+   Buffers: shared hit=78 read=3
+   I/O Timings: shared read=0.030
+ Planning Time: 0.831 ms
+ Execution Time: 0.317 ms
+(35 rows)
+
+--- Exécution 2 (cache chaud : c'est celle à comparer) ---
+                                                                            QUERY PLAN                                                                            
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Sort  (cost=82.45..82.47 rows=7 width=49) (actual time=0.135..0.137 rows=9 loops=1)
+   Sort Key: o.ordered_at DESC
+   Sort Method: quicksort  Memory: 25kB
+   Buffers: shared hit=38
+   ->  GroupAggregate  (cost=82.09..82.36 rows=7 width=49) (actual time=0.110..0.128 rows=9 loops=1)
+         Group Key: o.order_id
+         Buffers: shared hit=38
+         ->  Sort  (cost=82.09..82.13 rows=14 width=27) (actual time=0.098..0.100 rows=15 loops=1)
+               Sort Key: o.order_id
+               Sort Method: quicksort  Memory: 25kB
+               Buffers: shared hit=38
+               ->  Nested Loop  (cost=4.64..81.83 rows=14 width=27) (actual time=0.034..0.090 rows=15 loops=1)
+                     Buffers: shared hit=38
+                     ->  Bitmap Heap Scan on orders o  (cost=4.35..23.45 rows=7 width=17) (actual time=0.023..0.037 rows=9 loops=1)
+                           Recheck Cond: ((customer_id = 42) AND (ordered_at >= '2026-01-01'::date))
+                           Heap Blocks: exact=9
+                           Buffers: shared hit=11
+                           ->  Bitmap Index Scan on idx_orders_customer_ordered_at  (cost=0.00..4.35 rows=7 width=0) (actual time=0.013..0.013 rows=9 loops=1)
+                                 Index Cond: ((customer_id = 42) AND (ordered_at >= '2026-01-01'::date))
+                                 Buffers: shared hit=2
+                     ->  Index Scan using idx_order_items_order_id on order_items oi  (cost=0.29..8.32 rows=2 width=14) (actual time=0.004..0.005 rows=2 loops=9)
+                           Index Cond: (order_id = o.order_id)
+                           Buffers: shared hit=27
+ Planning:
+   Buffers: shared hit=15
+ Planning Time: 0.520 ms
+ Execution Time: 0.204 ms
+(27 rows)
+

@@ -1,0 +1,78 @@
+=== Q1. Chiffre d'affaires mensuel des commandes payées + évolution vs mois précédent ===
+    mois    | commandes |    ca     | evolution_pct 
+------------+-----------+-----------+---------------
+ 2025-01-01 |       192 | 150042.30 |              
+ 2025-02-01 |       153 | 125119.54 |         -16.6
+ 2025-03-01 |       177 | 148422.29 |          18.6
+ 2025-04-01 |       213 | 171443.66 |          15.5
+ 2025-05-01 |       218 | 171294.39 |          -0.1
+ 2025-06-01 |       183 | 153533.23 |         -10.4
+ 2025-07-01 |       224 | 178396.62 |          16.2
+ 2025-08-01 |       187 | 148980.16 |         -16.5
+ 2025-09-01 |       202 | 171406.31 |          15.1
+ 2025-10-01 |       214 | 176826.39 |           3.2
+ 2025-11-01 |       195 | 160402.51 |          -9.3
+ 2025-12-01 |       208 | 164438.54 |           2.5
+ 2026-01-01 |       209 | 169118.39 |           2.8
+ 2026-02-01 |       178 | 143165.81 |         -15.3
+ 2026-03-01 |       190 | 158447.11 |          10.7
+ 2026-04-01 |       202 | 167804.62 |           5.9
+ 2026-05-01 |       219 | 169467.51 |           1.0
+ 2026-06-01 |       197 | 158005.52 |          -6.8
+ 2026-07-01 |       171 | 130154.84 |         -17.6
+(19 rows)
+
+=== Q2. Top 3 produits par catégorie (CA des commandes payées) ===
+   category   |    sku    |        label        |    ca    | rang 
+--------------+-----------+---------------------+----------+------
+ Cuisine      | SKU-00001 | Produit de test 001 | 77143.77 |    1
+ Cuisine      | SKU-00029 | Produit de test 029 | 73570.61 |    2
+ Cuisine      | SKU-00007 | Produit de test 007 | 59551.06 |    3
+ Electronique | SKU-00044 | Produit de test 044 | 84160.62 |    1
+ Electronique | SKU-00033 | Produit de test 033 | 78123.75 |    2
+ Electronique | SKU-00036 | Produit de test 036 | 69829.76 |    3
+ Jardin       | SKU-00035 | Produit de test 035 | 72180.90 |    1
+ Jardin       | SKU-00051 | Produit de test 051 | 62381.00 |    2
+ Jardin       | SKU-00009 | Produit de test 009 | 60516.27 |    3
+ Livres       | SKU-00050 | Produit de test 050 | 70149.82 |    1
+ Livres       | SKU-00064 | Produit de test 064 | 56582.75 |    2
+ Livres       | SKU-00020 | Produit de test 020 | 49304.25 |    3
+ Maison       | SKU-00066 | Produit de test 066 | 68276.58 |    1
+ Maison       | SKU-00047 | Produit de test 047 | 52897.04 |    2
+ Maison       | SKU-00040 | Produit de test 040 | 48065.57 |    3
+ Sport        | SKU-00003 | Produit de test 003 | 91660.33 |    1
+ Sport        | SKU-00030 | Produit de test 030 | 73741.54 |    2
+ Sport        | SKU-00008 | Produit de test 008 | 56861.25 |    3
+(18 rows)
+
+=== Q3. CA et panier moyen par région et canal (commandes payées) ===
+        region        | channel | commandes |    ca     | panier_moyen 
+----------------------+---------+-----------+-----------+--------------
+ Auvergne-Rhone-Alpes | store   |       247 | 215803.04 |       873.70
+ Auvergne-Rhone-Alpes | web     |       221 | 193270.40 |       874.53
+ Auvergne-Rhone-Alpes | mobile  |       254 | 188573.80 |       742.42
+ Bretagne             | mobile  |       199 | 163437.10 |       821.29
+ Bretagne             | store   |       193 | 150952.79 |       782.14
+ Bretagne             | web     |       187 | 140365.30 |       750.62
+ Ile-de-France        | web     |       218 | 161347.03 |       740.12
+ Ile-de-France        | mobile  |       192 | 148957.76 |       775.82
+ Ile-de-France        | store   |       173 | 144717.19 |       836.52
+ Nouvelle-Aquitaine   | store   |       249 | 196153.39 |       787.76
+ Nouvelle-Aquitaine   | mobile  |       225 | 181610.71 |       807.16
+ Nouvelle-Aquitaine   | web     |       200 | 168958.44 |       844.79
+ Occitanie            | mobile  |       221 | 181816.00 |       822.70
+ Occitanie            | store   |       189 | 164419.11 |       869.94
+ Occitanie            | web     |       185 | 163824.80 |       885.54
+ PACA                 | web     |       198 | 164603.99 |       831.33
+ PACA                 | store   |       192 | 149561.73 |       778.97
+ PACA                 | mobile  |       189 | 138097.16 |       730.67
+(18 rows)
+
+=== Q4. Taux d'annulation et de remboursement par canal ===
+ channel | commandes | pct_annulees | pct_remboursees 
+---------+-----------+--------------+-----------------
+ mobile  |      1698 |          7.9 |             5.4
+ store   |      1687 |          8.7 |             4.9
+ web     |      1615 |          7.5 |             5.4
+(3 rows)
+

@@ -1,0 +1,88 @@
+### AVANT optimisation — 2026-11-02T13:32:04Z
+psql:/sql/09_perf_drop_indexes.sql:1: NOTICE:  index "idx_orders_customer_ordered_at" does not exist, skipping
+psql:/sql/09_perf_drop_indexes.sql:2: NOTICE:  index "idx_order_items_order_id" does not exist, skipping
+--- Contexte de mesure ---
+                                                       version                                                        
+----------------------------------------------------------------------------------------------------------------------
+ PostgreSQL 17.11 (Debian 17.11-1.pgdg13+2) on x86_64-pc-linux-gnu, compiled by gcc (Debian 14.2.0-19) 14.2.0, 64-bit
+(1 row)
+
+ shared_buffers | work_mem | orders | items 
+----------------+----------+--------+-------
+ 256MB          | 4MB      |   5000 |  9989
+(1 row)
+
+      indexname      
+---------------------
+ customers_email_key
+ customers_pkey
+ order_items_pkey
+ orders_pkey
+ products_pkey
+ products_sku_key
+(6 rows)
+
+--- Exécution 1 (cache à chaud partiel) ---
+                                                               QUERY PLAN                                                                
+-----------------------------------------------------------------------------------------------------------------------------------------
+ Sort  (cost=303.85..303.87 rows=7 width=49) (actual time=1.485..1.489 rows=9 loops=1)
+   Sort Key: o.ordered_at DESC
+   Sort Method: quicksort  Memory: 25kB
+   Buffers: shared hit=108
+   ->  GroupAggregate  (cost=303.49..303.75 rows=7 width=49) (actual time=1.465..1.476 rows=9 loops=1)
+         Group Key: o.order_id
+         Buffers: shared hit=105
+         ->  Sort  (cost=303.49..303.52 rows=14 width=27) (actual time=1.448..1.451 rows=15 loops=1)
+               Sort Key: o.order_id
+               Sort Method: quicksort  Memory: 25kB
+               Buffers: shared hit=105
+               ->  Hash Join  (cost=113.09..303.22 rows=14 width=27) (actual time=0.381..1.440 rows=15 loops=1)
+                     Hash Cond: (oi.order_id = o.order_id)
+                     Buffers: shared hit=102
+                     ->  Seq Scan on order_items oi  (cost=0.00..163.89 rows=9989 width=14) (actual time=0.005..0.556 rows=9989 loops=1)
+                           Buffers: shared hit=64
+                     ->  Hash  (cost=113.00..113.00 rows=7 width=17) (actual time=0.236..0.237 rows=9 loops=1)
+                           Buckets: 1024  Batches: 1  Memory Usage: 9kB
+                           Buffers: shared hit=38
+                           ->  Seq Scan on orders o  (cost=0.00..113.00 rows=7 width=17) (actual time=0.032..0.232 rows=9 loops=1)
+                                 Filter: ((ordered_at >= '2026-01-01'::date) AND (customer_id = 42))
+                                 Rows Removed by Filter: 4991
+                                 Buffers: shared hit=38
+ Planning:
+   Buffers: shared hit=83
+ Planning Time: 0.312 ms
+ Execution Time: 1.536 ms
+(27 rows)
+
+--- Exécution 2 (cache chaud : c'est celle à comparer) ---
+                                                               QUERY PLAN                                                                
+-----------------------------------------------------------------------------------------------------------------------------------------
+ Sort  (cost=303.85..303.87 rows=7 width=49) (actual time=1.344..1.346 rows=9 loops=1)
+   Sort Key: o.ordered_at DESC
+   Sort Method: quicksort  Memory: 25kB
+   Buffers: shared hit=102
+   ->  GroupAggregate  (cost=303.49..303.75 rows=7 width=49) (actual time=1.332..1.341 rows=9 loops=1)
+         Group Key: o.order_id
+         Buffers: shared hit=102
+         ->  Sort  (cost=303.49..303.52 rows=14 width=27) (actual time=1.324..1.326 rows=15 loops=1)
+               Sort Key: o.order_id
+               Sort Method: quicksort  Memory: 25kB
+               Buffers: shared hit=102
+               ->  Hash Join  (cost=113.09..303.22 rows=14 width=27) (actual time=0.366..1.320 rows=15 loops=1)
+                     Hash Cond: (oi.order_id = o.order_id)
+                     Buffers: shared hit=102
+                     ->  Seq Scan on order_items oi  (cost=0.00..163.89 rows=9989 width=14) (actual time=0.005..0.444 rows=9989 loops=1)
+                           Buffers: shared hit=64
+                     ->  Hash  (cost=113.00..113.00 rows=7 width=17) (actual time=0.236..0.237 rows=9 loops=1)
+                           Buckets: 1024  Batches: 1  Memory Usage: 9kB
+                           Buffers: shared hit=38
+                           ->  Seq Scan on orders o  (cost=0.00..113.00 rows=7 width=17) (actual time=0.031..0.233 rows=9 loops=1)
+                                 Filter: ((ordered_at >= '2026-01-01'::date) AND (customer_id = 42))
+                                 Rows Removed by Filter: 4991
+                                 Buffers: shared hit=38
+ Planning:
+   Buffers: shared hit=9
+ Planning Time: 0.159 ms
+ Execution Time: 1.376 ms
+(27 rows)
+

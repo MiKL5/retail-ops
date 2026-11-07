@@ -1,0 +1,42 @@
+=== A. COMMIT : le changement persiste (table temporaire de démonstration) ===
+CREATE TABLE
+BEGIN
+INSERT 0 1
+COMMIT
+ id |       note        
+----+-------------------
+  1 | validé par COMMIT
+(1 row)
+
+=== B. ROLLBACK sur une table réelle : le changement disparaît ===
+ order_id | status 
+----------+--------
+        1 | paid
+(1 row)
+
+BEGIN
+UPDATE 1
+ order_id | status_dans_la_transaction 
+----------+----------------------------
+        1 | cancelled
+(1 row)
+
+ROLLBACK
+ order_id | status_apres_rollback 
+----------+-----------------------
+        1 | paid
+(1 row)
+
+=== C. SAVEPOINT : annulation partielle ===
+BEGIN
+INSERT 0 1
+SAVEPOINT
+INSERT 0 1
+ROLLBACK
+COMMIT
+ id |       note        
+----+-------------------
+  1 | validé par COMMIT
+  2 | gardé
+(2 rows)
+

@@ -1,0 +1,35 @@
+### 2026-11-02T13:24:15Z — Tests de droits (connexion TLS verify-full)
+
+[analyst] SELECT sur orders            -> AUTORISÉ attendu
+5000
+
+[analyst] UPDATE sur orders            -> REFUSÉ attendu
+ERROR:  permission denied for table orders
+
+[analyst] DELETE sur customers         -> REFUSÉ attendu
+ERROR:  permission denied for table customers
+
+[analyst] CREATE TABLE                 -> REFUSÉ attendu
+ERROR:  permission denied for schema retail
+LINE 1: CREATE TABLE retail.hack(id int);
+                     ^
+
+[app] UPDATE orders (transaction annulée) -> AUTORISÉ attendu
+BEGIN
+ order_id | status 
+----------+--------
+        1 | paid
+(1 row)
+
+UPDATE 1
+ROLLBACK
+
+[app] DELETE sur orders                -> REFUSÉ attendu
+ERROR:  permission denied for table orders
+
+[app] UPDATE sur customers             -> REFUSÉ attendu
+ERROR:  permission denied for table customers
+
+[app] CREATE ROLE                      -> REFUSÉ attendu
+ERROR:  permission denied to create role
+DETAIL:  Only roles with the CREATEROLE attribute may create roles.

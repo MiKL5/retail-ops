@@ -1,0 +1,37 @@
+### 2026-11-02T13:18:48Z — Schéma + chargement
+CREATE SCHEMA
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+BEGIN
+TRUNCATE TABLE
+COPY 300
+COPY 80
+COPY 5000
+COPY 9989
+ setval 
+--------
+    300
+(1 row)
+
+ setval 
+--------
+     80
+(1 row)
+
+ setval 
+--------
+   5000
+(1 row)
+
+ setval 
+--------
+   9989
+(1 row)
+
+COMMIT
+ANALYZE
+ANALYZE
+ANALYZE
+ANALYZE

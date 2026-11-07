@@ -1,0 +1,121 @@
+
+===== APRES : mesure 1 =====
+                                                                     QUERY PLAN                                                                     
+----------------------------------------------------------------------------------------------------------------------------------------------------
+ Limit  (cost=32.60..32.64 rows=14 width=22) (actual time=0.713..0.721 rows=13.00 loops=1)
+   Buffers: shared hit=19
+   ->  Sort  (cost=32.60..32.64 rows=14 width=22) (actual time=0.712..0.713 rows=13.00 loops=1)
+         Sort Key: ordered_at DESC, order_id DESC
+         Sort Method: quicksort  Memory: 25kB
+         Buffers: shared hit=19
+         ->  Bitmap Heap Scan on orders  (cost=4.39..32.34 rows=14 width=22) (actual time=0.127..0.331 rows=13.00 loops=1)
+               Recheck Cond: (customer_id = 154)
+               Heap Blocks: exact=11
+               Buffers: shared hit=13
+               ->  Bitmap Index Scan on idx_orders_customer_recent  (cost=0.00..4.39 rows=14 width=0) (actual time=0.113..0.113 rows=13.00 loops=1)
+                     Index Cond: (customer_id = 154)
+                     Index Searches: 1
+                     Buffers: shared hit=2
+ Planning:
+   Buffers: shared hit=111 read=1
+   I/O Timings: shared read=0.117
+ Planning Time: 3.544 ms
+ Execution Time: 1.161 ms
+(19 rows)
+
+
+===== APRES : mesure 2 =====
+                                                                     QUERY PLAN                                                                     
+----------------------------------------------------------------------------------------------------------------------------------------------------
+ Limit  (cost=32.60..32.64 rows=14 width=22) (actual time=0.053..0.055 rows=13.00 loops=1)
+   Buffers: shared hit=19
+   ->  Sort  (cost=32.60..32.64 rows=14 width=22) (actual time=0.052..0.053 rows=13.00 loops=1)
+         Sort Key: ordered_at DESC, order_id DESC
+         Sort Method: quicksort  Memory: 25kB
+         Buffers: shared hit=19
+         ->  Bitmap Heap Scan on orders  (cost=4.39..32.34 rows=14 width=22) (actual time=0.023..0.033 rows=13.00 loops=1)
+               Recheck Cond: (customer_id = 154)
+               Heap Blocks: exact=11
+               Buffers: shared hit=13
+               ->  Bitmap Index Scan on idx_orders_customer_recent  (cost=0.00..4.39 rows=14 width=0) (actual time=0.008..0.008 rows=13.00 loops=1)
+                     Index Cond: (customer_id = 154)
+                     Index Searches: 1
+                     Buffers: shared hit=2
+ Planning:
+   Buffers: shared hit=112
+ Planning Time: 0.178 ms
+ Execution Time: 0.082 ms
+(18 rows)
+
+
+===== APRES : mesure 3 =====
+                                                                     QUERY PLAN                                                                     
+----------------------------------------------------------------------------------------------------------------------------------------------------
+ Limit  (cost=32.60..32.64 rows=14 width=22) (actual time=0.059..0.061 rows=13.00 loops=1)
+   Buffers: shared hit=19
+   ->  Sort  (cost=32.60..32.64 rows=14 width=22) (actual time=0.058..0.059 rows=13.00 loops=1)
+         Sort Key: ordered_at DESC, order_id DESC
+         Sort Method: quicksort  Memory: 25kB
+         Buffers: shared hit=19
+         ->  Bitmap Heap Scan on orders  (cost=4.39..32.34 rows=14 width=22) (actual time=0.022..0.032 rows=13.00 loops=1)
+               Recheck Cond: (customer_id = 154)
+               Heap Blocks: exact=11
+               Buffers: shared hit=13
+               ->  Bitmap Index Scan on idx_orders_customer_recent  (cost=0.00..4.39 rows=14 width=0) (actual time=0.008..0.008 rows=13.00 loops=1)
+                     Index Cond: (customer_id = 154)
+                     Index Searches: 1
+                     Buffers: shared hit=2
+ Planning:
+   Buffers: shared hit=112
+ Planning Time: 0.202 ms
+ Execution Time: 0.096 ms
+(18 rows)
+
+
+===== APRES : mesure 4 =====
+                                                                     QUERY PLAN                                                                     
+----------------------------------------------------------------------------------------------------------------------------------------------------
+ Limit  (cost=32.60..32.64 rows=14 width=22) (actual time=0.044..0.046 rows=13.00 loops=1)
+   Buffers: shared hit=19
+   ->  Sort  (cost=32.60..32.64 rows=14 width=22) (actual time=0.043..0.044 rows=13.00 loops=1)
+         Sort Key: ordered_at DESC, order_id DESC
+         Sort Method: quicksort  Memory: 25kB
+         Buffers: shared hit=19
+         ->  Bitmap Heap Scan on orders  (cost=4.39..32.34 rows=14 width=22) (actual time=0.014..0.024 rows=13.00 loops=1)
+               Recheck Cond: (customer_id = 154)
+               Heap Blocks: exact=11
+               Buffers: shared hit=13
+               ->  Bitmap Index Scan on idx_orders_customer_recent  (cost=0.00..4.39 rows=14 width=0) (actual time=0.007..0.007 rows=13.00 loops=1)
+                     Index Cond: (customer_id = 154)
+                     Index Searches: 1
+                     Buffers: shared hit=2
+ Planning:
+   Buffers: shared hit=112
+ Planning Time: 0.173 ms
+ Execution Time: 0.072 ms
+(18 rows)
+
+
+===== APRES : mesure 5 =====
+                                                                     QUERY PLAN                                                                     
+----------------------------------------------------------------------------------------------------------------------------------------------------
+ Limit  (cost=32.60..32.64 rows=14 width=22) (actual time=0.042..0.045 rows=13.00 loops=1)
+   Buffers: shared hit=19
+   ->  Sort  (cost=32.60..32.64 rows=14 width=22) (actual time=0.042..0.043 rows=13.00 loops=1)
+         Sort Key: ordered_at DESC, order_id DESC
+         Sort Method: quicksort  Memory: 25kB
+         Buffers: shared hit=19
+         ->  Bitmap Heap Scan on orders  (cost=4.39..32.34 rows=14 width=22) (actual time=0.014..0.024 rows=13.00 loops=1)
+               Recheck Cond: (customer_id = 154)
+               Heap Blocks: exact=11
+               Buffers: shared hit=13
+               ->  Bitmap Index Scan on idx_orders_customer_recent  (cost=0.00..4.39 rows=14 width=0) (actual time=0.007..0.008 rows=13.00 loops=1)
+                     Index Cond: (customer_id = 154)
+                     Index Searches: 1
+                     Buffers: shared hit=2
+ Planning:
+   Buffers: shared hit=112
+ Planning Time: 0.165 ms
+ Execution Time: 0.070 ms
+(18 rows)
+

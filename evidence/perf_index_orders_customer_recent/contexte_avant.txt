@@ -1,0 +1,15 @@
+           mesure_le           |   base    |  compte  |                                                         version                                                          
+-------------------------------+-----------+----------+--------------------------------------------------------------------------------------------------------------------------
+ 2026-11-07 07:18:45.149346+00 | retailops | postgres | PostgreSQL 18.6 (Debian 18.6-1.pgdg13+2) on aarch64-unknown-linux-gnu, compiled by gcc (Debian 14.2.0-19) 14.2.0, 64-bit
+(1 row)
+
+ nombre_commandes 
+------------------
+             5000
+(1 row)
+
+  indexname  |                                indexdef                                 
+-------------+-------------------------------------------------------------------------
+ orders_pkey | CREATE UNIQUE INDEX orders_pkey ON retail.orders USING btree (order_id)
+(1 row)
+

@@ -1,0 +1,35 @@
+### Coût en écriture des index — 2026-11-02T13:32:05Z
+psql:/sql/09_perf_write_cost.sql:3: NOTICE:  schema "perf" does not exist, skipping
+DROP SCHEMA
+CREATE SCHEMA
+CREATE TABLE
+CREATE TABLE
+CREATE INDEX
+--- INSERT 50 000 lignes SANS index secondaire ---
+                                                            QUERY PLAN                                                             
+-----------------------------------------------------------------------------------------------------------------------------------
+ Insert on w_noidx  (cost=0.00..1500.00 rows=0 width=0) (actual time=167.425..167.426 rows=0 loops=1)
+   Buffers: shared hit=150463 read=1 dirtied=507 written=509
+   I/O Timings: shared read=0.088 write=5.878
+   ->  Function Scan on generate_series g  (cost=0.00..1500.00 rows=50000 width=80) (actual time=7.088..35.371 rows=50000 loops=1)
+ Planning:
+   Buffers: shared hit=18
+ Planning Time: 0.262 ms
+ Execution Time: 168.050 ms
+(8 rows)
+
+--- INSERT 50 000 lignes AVEC index (customer_id, ordered_at) ---
+                                                            QUERY PLAN                                                             
+-----------------------------------------------------------------------------------------------------------------------------------
+ Insert on w_idx  (cost=0.00..1500.00 rows=0 width=0) (actual time=188.437..188.438 rows=0 loops=1)
+   Buffers: shared hit=250722 read=2 dirtied=772 written=773
+   I/O Timings: shared read=0.022 write=5.271
+   ->  Function Scan on generate_series g  (cost=0.00..1500.00 rows=50000 width=80) (actual time=2.925..21.563 rows=50000 loops=1)
+ Planning Time: 0.085 ms
+ Execution Time: 188.750 ms
+(6 rows)
+
+psql:/sql/09_perf_write_cost.sql:17: NOTICE:  drop cascades to 2 other objects
+DETAIL:  drop cascades to table perf.w_noidx
+drop cascades to table perf.w_idx
+DROP SCHEMA

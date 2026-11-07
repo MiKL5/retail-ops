@@ -1,0 +1,45 @@
+;
+; Archive created at 2026-11-07 08:53:31 UTC
+;     dbname: retailops
+;     TOC Entries: 35
+;     Compression: gzip
+;     Dump Version: 1.16-0
+;     Format: CUSTOM
+;     Integer: 4 bytes
+;     Offset: 8 bytes
+;     Dumped from database version: 18.6 (Debian 18.6-1.pgdg13+2)
+;     Dumped by pg_dump version: 18.6 (Debian 18.6-1.pgdg13+2)
+;
+;
+; Selected TOC Entries:
+;
+3498; 0 0 ACL - SCHEMA public pg_database_owner
+8; 2615 16393 SCHEMA - retail postgres
+3499; 0 0 ACL - SCHEMA retail postgres
+3; 3079 16478 EXTENSION - pg_stat_statements 
+3500; 0 0 COMMENT - EXTENSION pg_stat_statements 
+2; 3079 16473 EXTENSION - pgaudit 
+3501; 0 0 COMMENT - EXTENSION pgaudit 
+222; 1259 16394 TABLE retail customers postgres
+3502; 0 0 ACL retail TABLE customers postgres
+225; 1259 16443 TABLE retail order_items postgres
+3503; 0 0 ACL retail TABLE order_items postgres
+224; 1259 16424 TABLE retail orders postgres
+3504; 0 0 ACL retail TABLE orders postgres
+223; 1259 16408 TABLE retail products postgres
+3505; 0 0 ACL retail TABLE products postgres
+3487; 0 16394 TABLE DATA retail customers postgres
+3490; 0 16443 TABLE DATA retail order_items postgres
+3489; 0 16424 TABLE DATA retail orders postgres
+3488; 0 16408 TABLE DATA retail products postgres
+3323; 2606 16407 CONSTRAINT retail customers customers_email_key postgres
+3325; 2606 16405 CONSTRAINT retail customers customers_pkey postgres
+3334; 2606 16454 CONSTRAINT retail order_items order_items_pkey postgres
+3332; 2606 16437 CONSTRAINT retail orders orders_pkey postgres
+3327; 2606 16421 CONSTRAINT retail products products_pkey postgres
+3329; 2606 16423 CONSTRAINT retail products products_sku_key postgres
+3330; 1259 16472 INDEX retail idx_orders_customer_recent postgres
+3336; 2606 16455 FK CONSTRAINT retail order_items order_items_order_id_fkey postgres
+3337; 2606 16460 FK CONSTRAINT retail order_items order_items_product_id_fkey postgres
+3335; 2606 16438 FK CONSTRAINT retail orders orders_customer_id_fkey postgres
+2077; 826 16471 DEFAULT ACL retail DEFAULT PRIVILEGES FOR TABLES postgres

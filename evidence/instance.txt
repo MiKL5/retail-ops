@@ -1,0 +1,44 @@
+--- Version ---
+                                                         version                                                          
+--------------------------------------------------------------------------------------------------------------------------
+ PostgreSQL 18.6 (Debian 18.6-1.pgdg13+2) on aarch64-unknown-linux-gnu, compiled by gcc (Debian 14.2.0-19) 14.2.0, 64-bit
+(1 row)
+
+--- Fichiers et répertoires ---
+           config_file           
+---------------------------------
+ /etc/postgresql/postgresql.conf
+(1 row)
+
+          hba_file           
+-----------------------------
+ /etc/postgresql/pg_hba.conf
+(1 row)
+
+        data_directory         
+-------------------------------
+ /var/lib/postgresql/18/docker
+(1 row)
+
+ port 
+------
+ 5432
+(1 row)
+
+ ssl 
+-----
+ on
+(1 row)
+
+--- Bases et schémas ---
+  datname  
+-----------
+ postgres
+ retailops
+(2 rows)
+
+ schema_name 
+-------------
+ retail
+(1 row)
+

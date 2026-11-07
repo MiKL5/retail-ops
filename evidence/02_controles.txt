@@ -1,0 +1,39 @@
+=== 1. Volumes importés ===
+ table_name  | lignes | attendu 
+-------------+--------+---------
+ customers   |    300 | 300
+ products    |     80 | 80
+ orders      |   5000 | 5000
+ order_items |   9989 | ~10000
+(4 rows)
+
+=== 2. Doublons (attendu : 0 ligne partout) ===
+ controle | valeur | count 
+----------+--------+-------
+(0 rows)
+
+=== 3. Clés étrangères invalides (attendu : 0) ===
+        controle         | orphelins 
+-------------------------+-----------
+ orders -> customers     |         0
+ order_items -> orders   |         0
+ order_items -> products |         0
+(3 rows)
+
+=== 4. Cohérence métier (informatif : à analyser, pas à supprimer) ===
+                  observation                  |  n  
+-----------------------------------------------+-----
+ commandes sans ligne                          |   0
+ commandes antérieures à la création du client | 872
+ lignes vendues sur un produit inactif         | 965
+ lignes dont le prix diffère du prix catalogue |   0
+(4 rows)
+
+=== 5. Clés étrangères déclarées ===
+    table_source    |           conname           |   table_cible    
+--------------------+-----------------------------+------------------
+ retail.orders      | orders_customer_id_fkey     | retail.customers
+ retail.order_items | order_items_order_id_fkey   | retail.orders
+ retail.order_items | order_items_product_id_fkey | retail.products
+(3 rows)
+

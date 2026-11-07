@@ -1,0 +1,42 @@
+### 2026-11-02T13:17:38Z — Architecture
+--- docker compose ps
+NAME           IMAGE                                                                     COMMAND                  SERVICE   CREATED         STATUS                   PORTS
+retailops-db   sha256:f9b41d45db7e28862afe6fcab4ede5a475e612bb33d4d67e122f316a8c7defc6   "docker-entrypoint-t…"   db        5 minutes ago   Up 9 seconds (healthy)   5432/tcp
+--- version
+PostgreSQL 17.11 (Debian 17.11-1.pgdg13+2) on x86_64-pc-linux-gnu, compiled by gcc (Debian 14.2.0-19) 14.2.0, 64-bit
+--- fichiers et répertoires
+/etc/postgresql/postgresql.conf
+/etc/postgresql/pg_hba.conf
+/var/lib/postgresql/data
+--- paramètres clés
+*
+5432
+scram-sha-256
+on
+pgaudit,pg_stat_statements
+on
+--- bases et schémas
+                                                    List of databases
+   Name    |  Owner   | Encoding | Locale Provider |  Collate   |   Ctype    | Locale | ICU Rules |   Access privileges   
+-----------+----------+----------+-----------------+------------+------------+--------+-----------+-----------------------
+ postgres  | postgres | UTF8     | libc            | en_US.utf8 | en_US.utf8 |        |           | 
+ retailops | postgres | UTF8     | libc            | en_US.utf8 | en_US.utf8 |        |           | 
+ template0 | postgres | UTF8     | libc            | en_US.utf8 | en_US.utf8 |        |           | =c/postgres          +
+           |          |          |                 |            |            |        |           | postgres=CTc/postgres
+ template1 | postgres | UTF8     | libc            | en_US.utf8 | en_US.utf8 |        |           | =c/postgres          +
+           |          |          |                 |            |            |        |           | postgres=CTc/postgres
+(4 rows)
+
+      List of schemas
+  Name  |       Owner       
+--------+-------------------
+ public | pg_database_owner
+(1 row)
+
+--- volumes Docker (persistance)
+DRIVER    VOLUME NAME
+local     retailops_pgdata
+local     retailops_pgtls
+local     retailops_walarchive
+pgdata -> /var/lib/docker/volumes/retailops_pgdata/_data
+--- port publié (127.0.0.1 uniquement)

@@ -1,0 +1,100 @@
+
+===== AVANT : mesure 1 =====
+                                                     QUERY PLAN                                                     
+--------------------------------------------------------------------------------------------------------------------
+ Limit  (cost=100.77..100.80 rows=14 width=22) (actual time=0.316..0.323 rows=13.00 loops=1)
+   Buffers: shared hit=44
+   ->  Sort  (cost=100.77..100.80 rows=14 width=22) (actual time=0.316..0.317 rows=13.00 loops=1)
+         Sort Key: ordered_at DESC, order_id DESC
+         Sort Method: quicksort  Memory: 25kB
+         Buffers: shared hit=44
+         ->  Seq Scan on orders  (cost=0.00..100.50 rows=14 width=22) (actual time=0.013..0.261 rows=13.00 loops=1)
+               Filter: (customer_id = 154)
+               Rows Removed by Filter: 4987
+               Buffers: shared hit=38
+ Planning:
+   Buffers: shared hit=89
+ Planning Time: 0.488 ms
+ Execution Time: 0.398 ms
+(14 rows)
+
+
+===== AVANT : mesure 2 =====
+                                                     QUERY PLAN                                                     
+--------------------------------------------------------------------------------------------------------------------
+ Limit  (cost=100.77..100.80 rows=14 width=22) (actual time=0.170..0.173 rows=13.00 loops=1)
+   Buffers: shared hit=44
+   ->  Sort  (cost=100.77..100.80 rows=14 width=22) (actual time=0.169..0.170 rows=13.00 loops=1)
+         Sort Key: ordered_at DESC, order_id DESC
+         Sort Method: quicksort  Memory: 25kB
+         Buffers: shared hit=44
+         ->  Seq Scan on orders  (cost=0.00..100.50 rows=14 width=22) (actual time=0.010..0.146 rows=13.00 loops=1)
+               Filter: (customer_id = 154)
+               Rows Removed by Filter: 4987
+               Buffers: shared hit=38
+ Planning:
+   Buffers: shared hit=89
+ Planning Time: 0.171 ms
+ Execution Time: 0.206 ms
+(14 rows)
+
+
+===== AVANT : mesure 3 =====
+                                                     QUERY PLAN                                                     
+--------------------------------------------------------------------------------------------------------------------
+ Limit  (cost=100.77..100.80 rows=14 width=22) (actual time=0.171..0.174 rows=13.00 loops=1)
+   Buffers: shared hit=44
+   ->  Sort  (cost=100.77..100.80 rows=14 width=22) (actual time=0.171..0.172 rows=13.00 loops=1)
+         Sort Key: ordered_at DESC, order_id DESC
+         Sort Method: quicksort  Memory: 25kB
+         Buffers: shared hit=44
+         ->  Seq Scan on orders  (cost=0.00..100.50 rows=14 width=22) (actual time=0.009..0.149 rows=13.00 loops=1)
+               Filter: (customer_id = 154)
+               Rows Removed by Filter: 4987
+               Buffers: shared hit=38
+ Planning:
+   Buffers: shared hit=89
+ Planning Time: 0.179 ms
+ Execution Time: 0.207 ms
+(14 rows)
+
+
+===== AVANT : mesure 4 =====
+                                                     QUERY PLAN                                                     
+--------------------------------------------------------------------------------------------------------------------
+ Limit  (cost=100.77..100.80 rows=14 width=22) (actual time=0.175..0.178 rows=13.00 loops=1)
+   Buffers: shared hit=44
+   ->  Sort  (cost=100.77..100.80 rows=14 width=22) (actual time=0.174..0.175 rows=13.00 loops=1)
+         Sort Key: ordered_at DESC, order_id DESC
+         Sort Method: quicksort  Memory: 25kB
+         Buffers: shared hit=44
+         ->  Seq Scan on orders  (cost=0.00..100.50 rows=14 width=22) (actual time=0.006..0.152 rows=13.00 loops=1)
+               Filter: (customer_id = 154)
+               Rows Removed by Filter: 4987
+               Buffers: shared hit=38
+ Planning:
+   Buffers: shared hit=89
+ Planning Time: 0.166 ms
+ Execution Time: 0.205 ms
+(14 rows)
+
+
+===== AVANT : mesure 5 =====
+                                                     QUERY PLAN                                                     
+--------------------------------------------------------------------------------------------------------------------
+ Limit  (cost=100.77..100.80 rows=14 width=22) (actual time=0.169..0.172 rows=13.00 loops=1)
+   Buffers: shared hit=44
+   ->  Sort  (cost=100.77..100.80 rows=14 width=22) (actual time=0.168..0.169 rows=13.00 loops=1)
+         Sort Key: ordered_at DESC, order_id DESC
+         Sort Method: quicksort  Memory: 25kB
+         Buffers: shared hit=44
+         ->  Seq Scan on orders  (cost=0.00..100.50 rows=14 width=22) (actual time=0.006..0.146 rows=13.00 loops=1)
+               Filter: (customer_id = 154)
+               Rows Removed by Filter: 4987
+               Buffers: shared hit=38
+ Planning:
+   Buffers: shared hit=89
+ Planning Time: 0.143 ms
+ Execution Time: 0.214 ms
+(14 rows)
+

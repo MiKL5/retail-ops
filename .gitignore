@@ -1,0 +1,10 @@
+.DS_Store
+Projet_RetailOps_PostgreSQL.pdf
+.env
+certs/
+backups/*.dump
+*.key
+*.pem
+evidence/**/*.raw.log
+sql/passwd.txt
+dataset.zip

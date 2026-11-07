@@ -1,0 +1,13 @@
+           name           |            setting            |       source       
+--------------------------+-------------------------------+--------------------
+ archive_mode             | on                            | configuration file
+ archive_timeout          | 300                           | configuration file
+ data_directory           | /var/lib/postgresql/18/docker | override
+ pgaudit.log              | ddl, role, write              | configuration file
+ port                     | 5432                          | configuration file
+ shared_preload_libraries | pgaudit,pg_stat_statements    | configuration file
+ ssl                      | on                            | configuration file
+ ssl_min_protocol_version | TLSv1.2                       | configuration file
+ track_io_timing          | on                            | configuration file
+(9 rows)
+

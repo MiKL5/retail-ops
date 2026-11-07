@@ -1,0 +1,8 @@
+CREATE TABLE
+DROP TABLE
+UPDATE 1
+ count 
+-------
+   300
+(1 row)
+

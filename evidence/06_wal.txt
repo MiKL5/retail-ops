@@ -1,0 +1,41 @@
+### 2026-11-02T13:29:24Z — Archivage WAL
+ archive_mode 
+--------------
+ on
+(1 row)
+
+                                     archive_command                                      
+------------------------------------------------------------------------------------------
+ test ! -f /var/lib/postgresql/wal_archive/%f && cp %p /var/lib/postgresql/wal_archive/%f
+(1 row)
+
+ archive_timeout 
+-----------------
+ 1min
+(1 row)
+
+ wal_level 
+-----------
+ replica
+(1 row)
+
+-[ RECORD 1 ]------+------------------------------
+archived_count     | 7
+last_archived_wal  | 000000010000000000000007
+last_archived_time | 2026-11-02 13:29:24.608214+00
+failed_count       | 0
+last_failed_wal    | 
+last_failed_time   | 
+stats_reset        | 2026-11-02 13:17:29.500752+00
+
+--- Fichiers archivés (volume walarchive)
+total 114688
+-rw------- 1 postgres postgres 16777216 Nov  2 13:17 000000010000000000000001
+-rw------- 1 postgres postgres 16777216 Nov  2 13:22 000000010000000000000002
+-rw------- 1 postgres postgres 16777216 Nov  2 13:22 000000010000000000000003
+-rw------- 1 postgres postgres 16777216 Nov  2 13:22 000000010000000000000004
+-rw------- 1 postgres postgres 16777216 Nov  2 13:27 000000010000000000000005
+-rw------- 1 postgres postgres 16777216 Nov  2 13:28 000000010000000000000006
+-rw------- 1 postgres postgres 16777216 Nov  2 13:29 000000010000000000000007
+
+Segments archivés : 7

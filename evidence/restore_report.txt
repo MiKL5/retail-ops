@@ -1,0 +1,4 @@
+customers | source=300 | cible=300 | PASS
+products | source=80 | cible=80 | PASS
+orders | source=5000 | cible=5000 | PASS
+order_items | source=9989 | cible=9989 | PASS

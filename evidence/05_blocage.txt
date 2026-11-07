@@ -1,0 +1,33 @@
+### 2026-11-02T13:27:17Z — Blocage provoqué
+Session A : ouvre une transaction, verrouille la ligne order_id=1 et la garde 40 s
+Session B : tente de modifier la MÊME ligne -> elle attend
+
+>>> Diagnostic (session C = administrateur)
+=== pg_stat_activity : sessions en attente et bloqueurs ===
+ pid | application_name | state  | wait_event_type |  wait_event   | bloque_par | age_transaction |                           requete                            
+-----+------------------+--------+-----------------+---------------+------------+-----------------+--------------------------------------------------------------
+ 669 | session_A        | active | Timeout         | PgSleep       | {}         | 00:00:05.012433 | SET application_name='session_A'; BEGIN; UPDATE retail.order
+ 678 | session_B        | active | Lock            | transactionid | {669}      | 00:00:02.995448 | SET application_name='session_B'; UPDATE retail.orders SET s
+(2 rows)
+
+=== pg_locks : verrous non accordés (granted = false) ===
+ pid | application_name |   locktype    |   mode    | granted | relation 
+-----+------------------+---------------+-----------+---------+----------
+ 678 | session_B        | transactionid | ShareLock | f       | 
+(1 row)
+
+
+>>> Résolution : on termine la session BLOQUANTE (A) -> son travail est annulé, B passe
+t
+
+>>> Après résolution : plus aucune session bloquée
+=== pg_stat_activity : sessions en attente et bloqueurs ===
+ pid | application_name | state | wait_event_type | wait_event | bloque_par | age_transaction | requete 
+-----+------------------+-------+-----------------+------------+------------+-----------------+---------
+(0 rows)
+
+=== pg_locks : verrous non accordés (granted = false) ===
+ pid | application_name | locktype | mode | granted | relation 
+-----+------------------+----------+------+---------+----------
+(0 rows)
+

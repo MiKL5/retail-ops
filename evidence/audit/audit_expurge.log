@@ -1,0 +1,14 @@
+retailops-db  | 2026-11-07 08:18:39.786 GMT [3483] postgres@retailops LOG:  AUDIT: SESSION,1,1,DDL,CREATE EXTENSION,,,CREATE EXTENSION IF NOT EXISTS pgaudit,<not logged>
+retailops-db  | 2026-11-07 08:18:39.810 GMT [3483] postgres@retailops LOG:  AUDIT: SESSION,2,1,DDL,CREATE EXTENSION,,,CREATE EXTENSION IF NOT EXISTS pg_stat_statements,<not logged>
+retailops-db  | 2026-11-07 08:18:39.838 GMT [3483] postgres@retailops LOG:  AUDIT: SESSION,2,1,DDL,CREATE EXTENSION,EXTENSION,pg_stat_statements,<previously logged>,<previously logged>
+retailops-db  | 2026-11-07 08:18:39.843 GMT [3483] postgres@retailops LOG:  AUDIT: SESSION,3,1,DDL,ALTER SYSTEM,,,"ALTER SYSTEM SET pgaudit.log = 'ddl, role, write'",<not logged>
+retailops-db  | 2026-11-07 08:18:39.845 GMT [3483] postgres@retailops LOG:  AUDIT: SESSION,4,1,DDL,ALTER SYSTEM,,,ALTER SYSTEM SET pgaudit.log_parameter = off,<not logged>
+retailops-db  | 2026-11-07 08:18:39.847 GMT [3483] postgres@retailops LOG:  AUDIT: SESSION,5,1,DDL,ALTER SYSTEM,,,ALTER SYSTEM SET pgaudit.log_relation = on,<not logged>
+retailops-db  | 2026-11-07 08:18:39.850 GMT [3483] postgres@retailops LOG:  AUDIT: SESSION,6,1,DDL,ALTER SYSTEM,,,ALTER SYSTEM SET pgaudit.log_statement_once = on,<not logged>
+retailops-db  | 2026-11-07 08:18:39.851 GMT [3483] postgres@retailops LOG:  AUDIT: SESSION,7,1,ROLE,CREATE ROLE,,,CREATE ROLE auditeur NOLOGIN,<not logged>
+retailops-db  | 2026-11-07 08:18:39.852 GMT [3483] postgres@retailops LOG:  AUDIT: SESSION,8,1,ROLE,GRANT,TABLE,,GRANT SELECT ON retail.customers TO auditeur,<not logged>
+retailops-db  | 2026-11-07 08:18:39.855 GMT [3483] postgres@retailops LOG:  AUDIT: SESSION,9,1,DDL,ALTER SYSTEM,,,ALTER SYSTEM SET pgaudit.role = 'auditeur',<not logged>
+retailops-db  | 2026-11-07 08:21:54.003 GMT [3665] postgres@retailops LOG:  AUDIT: SESSION,1,1,DDL,CREATE TABLE,TABLE,retail.audit_demo,CREATE TABLE retail.audit_demo(i int),<not logged>
+retailops-db  | 2026-11-07 08:21:54.005 GMT [3665] postgres@retailops LOG:  AUDIT: SESSION,2,1,DDL,DROP TABLE,TABLE,retail.audit_demo,DROP TABLE retail.audit_demo,<not logged>
+retailops-db  | 2026-11-07 08:21:54.010 GMT [3665] postgres@retailops LOG:  AUDIT: SESSION,3,1,WRITE,UPDATE,TABLE,retail.orders,UPDATE retail.orders SET status = status WHERE order_id = 1,<not logged>
+retailops-db  | 2026-11-07 08:21:54.015 GMT [3665] postgres@retailops LOG:  AUDIT: OBJECT,4,1,READ,SELECT,TABLE,retail.customers,SELECT count(*) FROM retail.customers,<not logged>

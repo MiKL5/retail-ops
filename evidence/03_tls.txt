@@ -1,0 +1,25 @@
+### 2026-11-02T13:24:18Z — Tests TLS
+
+1) Connexion chiffrée + vérification de l'identité du serveur (verify-full, CA locale)
+ ssl | tls_version |         cipher         | bits 
+-----+-------------+------------------------+------
+ t   | TLSv1.3     | TLS_AES_256_GCM_SHA384 |  256
+(1 row)
+
+
+2) Sans TLS (sslmode=disable) -> REFUSÉ attendu (pg_hba : hostssl uniquement)
+psql: error: connection to server at "localhost" (::1), port 5432 failed: FATAL:  pg_hba.conf rejects connection for host "::1", user "analyst_login", database "retailops", no encryption
+
+3) verify-full avec une MAUVAISE CA -> REFUSÉ attendu (le client ne fait pas confiance au serveur)
+psql: error: connection to server at "localhost" (::1), port 5432 failed: SSL error: certificate verify failed
+
+4) Certificat serveur (sujet, SAN, émetteur, validité)
+subject=CN=localhost
+issuer=CN=RetailOps Lab CA
+notBefore=Nov  2 13:17:29 2026 GMT
+notAfter=Feb  4 13:17:29 2029 GMT
+X509v3 Subject Alternative Name: 
+    DNS:localhost, DNS:db, IP Address:127.0.0.1
+
+5) Mauvais mot de passe -> REFUSÉ attendu (SCRAM)
+psql: error: connection to server at "localhost" (::1), port 5432 failed: FATAL:  password authentication failed for user "analyst_login"

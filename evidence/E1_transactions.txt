@@ -1,0 +1,41 @@
+--- État initial ---
+ order_id | status 
+----------+--------
+        1 | paid
+(1 row)
+
+--- COMMIT : le changement devient durable ---
+BEGIN
+UPDATE 1
+ order_id | status  
+----------+---------
+        1 | pending
+(1 row)
+
+COMMIT
+ order_id | status  
+----------+---------
+        1 | pending
+(1 row)
+
+--- ROLLBACK : le changement est annulé ---
+BEGIN
+UPDATE 1
+ order_id |  status   
+----------+-----------
+        1 | cancelled
+(1 row)
+
+ROLLBACK
+ order_id | status  
+----------+---------
+        1 | pending
+(1 row)
+
+--- Réinitialisation ---
+UPDATE 1
+ order_id | status 
+----------+--------
+        1 | paid
+(1 row)
+

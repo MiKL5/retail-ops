@@ -1,0 +1,29 @@
+### 2026-11-02T13:22:03Z — Persistance
+Avant : orders = 5000
+ Container retailops-db Restarting 
+ Container retailops-db Started 
+ Container retailops-db Recreate 
+ Container retailops-db Recreated 
+ Container retailops-db Starting 
+ Container retailops-db Started 
+ Container retailops-db Waiting 
+ Container retailops-db Healthy 
+Après restart          : orders = 5000
+ Container retailops-db Stopping 
+ Container retailops-db Stopped 
+ Container retailops-db Removing 
+ Container retailops-db Removed 
+ Network retailops_default Removing 
+ Network retailops_default Removed 
+ Network retailops_default Creating 
+ Network retailops_default Creating 
+ Network retailops_default Created 
+ Network retailops_default Created 
+ Container retailops-db Creating 
+ Container retailops-db Created 
+ Container retailops-db Starting 
+ Container retailops-db Started 
+ Container retailops-db Waiting 
+ Container retailops-db Healthy 
+Après down + up        : orders = 5000
+(NE PAS lancer 'docker compose down -v' : cela supprime aussi le volume et toutes les données.)

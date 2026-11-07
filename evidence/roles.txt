@@ -1,0 +1,14 @@
+    rolname    | rolcanlogin | rolsuper | rolcreatedb | rolcreaterole | rolreplication | rolbypassrls 
+---------------+-------------+----------+-------------+---------------+----------------+--------------
+ analyst_login | t           | f        | f           | f             | f              | f
+ app_login     | t           | f        | f           | f             | f              | f
+ retail_ro     | f           | f        | f           | f             | f              | f
+ retail_rw     | f           | f        | f           | f             | f              | f
+(4 rows)
+
+  utilisateur  | role_attribue 
+---------------+---------------
+ analyst_login | retail_ro
+ app_login     | retail_rw
+(2 rows)
+

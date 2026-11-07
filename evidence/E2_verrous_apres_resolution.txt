@@ -1,0 +1,77 @@
+--- Diagnostic des sessions actives ---
+ pid | usename | application_name | client_addr | state | wait_event_type | wait_event | xact_start | query_start | requete 
+-----+---------+------------------+-------------+-------+-----------------+------------+------------+-------------+---------
+(0 rows)
+
+--- Verrous sur les relations ---
+ pid  | usename  | state  | locktype |      table_concernee      |      mode       | granted | waitstart |                   requete                    
+------+----------+--------+----------+---------------------------+-----------------+---------+-----------+----------------------------------------------
+ 4796 | postgres | active | relation | pg_locks                  | AccessShareLock | t       |           | SELECT                                      +
+      |          |        |          |                           |                 |         |           |     l.pid,                                  +
+      |          |        |          |                           |                 |         |           |     a.usename,                              +
+      |          |        |          |                           |                 |         |           |     a.state,                                +
+      |          |        |          |                           |                 |         |           |     l.locktype,                             +
+      |          |        |          |                           |                 |         |           |     l.relation::regclass AS table_concernee,+
+      |          |        |          |                           |                 |         |           |     l.mode,                                 +
+      |          |        |          |                           |                 |         |           |  
+ 4796 | postgres | active | relation | pg_stat_activity          | AccessShareLock | t       |           | SELECT                                      +
+      |          |        |          |                           |                 |         |           |     l.pid,                                  +
+      |          |        |          |                           |                 |         |           |     a.usename,                              +
+      |          |        |          |                           |                 |         |           |     a.state,                                +
+      |          |        |          |                           |                 |         |           |     l.locktype,                             +
+      |          |        |          |                           |                 |         |           |     l.relation::regclass AS table_concernee,+
+      |          |        |          |                           |                 |         |           |     l.mode,                                 +
+      |          |        |          |                           |                 |         |           |  
+ 4796 | postgres | active | relation | pg_database               | AccessShareLock | t       |           | SELECT                                      +
+      |          |        |          |                           |                 |         |           |     l.pid,                                  +
+      |          |        |          |                           |                 |         |           |     a.usename,                              +
+      |          |        |          |                           |                 |         |           |     a.state,                                +
+      |          |        |          |                           |                 |         |           |     l.locktype,                             +
+      |          |        |          |                           |                 |         |           |     l.relation::regclass AS table_concernee,+
+      |          |        |          |                           |                 |         |           |     l.mode,                                 +
+      |          |        |          |                           |                 |         |           |  
+ 4796 | postgres | active | relation | pg_authid_rolname_index   | AccessShareLock | t       |           | SELECT                                      +
+      |          |        |          |                           |                 |         |           |     l.pid,                                  +
+      |          |        |          |                           |                 |         |           |     a.usename,                              +
+      |          |        |          |                           |                 |         |           |     a.state,                                +
+      |          |        |          |                           |                 |         |           |     l.locktype,                             +
+      |          |        |          |                           |                 |         |           |     l.relation::regclass AS table_concernee,+
+      |          |        |          |                           |                 |         |           |     l.mode,                                 +
+      |          |        |          |                           |                 |         |           |  
+ 4796 | postgres | active | relation | pg_authid                 | AccessShareLock | t       |           | SELECT                                      +
+      |          |        |          |                           |                 |         |           |     l.pid,                                  +
+      |          |        |          |                           |                 |         |           |     a.usename,                              +
+      |          |        |          |                           |                 |         |           |     a.state,                                +
+      |          |        |          |                           |                 |         |           |     l.locktype,                             +
+      |          |        |          |                           |                 |         |           |     l.relation::regclass AS table_concernee,+
+      |          |        |          |                           |                 |         |           |     l.mode,                                 +
+      |          |        |          |                           |                 |         |           |  
+ 4796 | postgres | active | relation | pg_database_datname_index | AccessShareLock | t       |           | SELECT                                      +
+      |          |        |          |                           |                 |         |           |     l.pid,                                  +
+      |          |        |          |                           |                 |         |           |     a.usename,                              +
+      |          |        |          |                           |                 |         |           |     a.state,                                +
+      |          |        |          |                           |                 |         |           |     l.locktype,                             +
+      |          |        |          |                           |                 |         |           |     l.relation::regclass AS table_concernee,+
+      |          |        |          |                           |                 |         |           |     l.mode,                                 +
+      |          |        |          |                           |                 |         |           |  
+ 4796 | postgres | active | relation | pg_database_oid_index     | AccessShareLock | t       |           | SELECT                                      +
+      |          |        |          |                           |                 |         |           |     l.pid,                                  +
+      |          |        |          |                           |                 |         |           |     a.usename,                              +
+      |          |        |          |                           |                 |         |           |     a.state,                                +
+      |          |        |          |                           |                 |         |           |     l.locktype,                             +
+      |          |        |          |                           |                 |         |           |     l.relation::regclass AS table_concernee,+
+      |          |        |          |                           |                 |         |           |     l.mode,                                 +
+      |          |        |          |                           |                 |         |           |  
+ 4796 | postgres | active | relation | pg_authid_oid_index       | AccessShareLock | t       |           | SELECT                                      +
+      |          |        |          |                           |                 |         |           |     l.pid,                                  +
+      |          |        |          |                           |                 |         |           |     a.usename,                              +
+      |          |        |          |                           |                 |         |           |     a.state,                                +
+      |          |        |          |                           |                 |         |           |     l.locktype,                             +
+      |          |        |          |                           |                 |         |           |     l.relation::regclass AS table_concernee,+
+      |          |        |          |                           |                 |         |           |     l.mode,                                 +
+      |          |        |          |                           |                 |         |           |  
+(8 rows)
+
+--- Interprétation ---
+Une session avec state = idle in transaction conserve un verrou.
+Une session avec wait_event_type = Lock et granted = false attend ce verrou.

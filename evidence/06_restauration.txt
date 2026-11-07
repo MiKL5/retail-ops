@@ -1,0 +1,23 @@
+### 2026-11-02T13:29:22Z — Restauration sur une base DISTINCTE
+NOTICE:  database "retail_restore_check" does not exist, skipping
+DROP DATABASE
+CREATE DATABASE
+Durée de restauration mesurée : 0 s  (base de ~quelques Mo ; sert de base à l'estimation du RTO)
+
+--- SOURCE (retailops)
+ca_total = 4096751.14
+commandes_payees = 3732
+customers = 300
+order_items = 9989
+orders = 5000
+products = 80
+
+--- RESTAURÉE (retail_restore_check)
+ca_total = 4096751.14
+commandes_payees = 3732
+customers = 300
+order_items = 9989
+orders = 5000
+products = 80
+
+RÉSULTAT : IDENTIQUE (lignes et CA total)

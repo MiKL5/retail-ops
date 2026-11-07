@@ -1,0 +1,23 @@
+CREATE EXTENSION
+ALTER ROLE
+=== Configuration pgAudit ===
+  shared_preload_libraries  
+----------------------------
+ pgaudit,pg_stat_statements
+(1 row)
+
+   pgaudit.log    
+------------------
+ ddl, write, role
+(1 row)
+
+ extname | extversion 
+---------+------------
+ pgaudit | 17.1
+(1 row)
+
+    rolname    |            rolconfig             
+---------------+----------------------------------
+ analyst_login | {"pgaudit.log=read, write, ddl"}
+(1 row)
+

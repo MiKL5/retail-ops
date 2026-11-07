@@ -1,0 +1,7 @@
+# script pour enreg la sortie dans evidence
+docker compose exec -T --user postgres db \
+  psql -X -U postgres -d retailops \
+  -c "SELECT pid, usename, state, wait_event_type, wait_event, query
+      FROM pg_stat_activity
+      WHERE datname = 'retailops';" \
+  > evidence/verrous_apres_rollback.txt
