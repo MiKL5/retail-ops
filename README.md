@@ -96,7 +96,7 @@ retailops-postgres/
 ## [**Le rapport est ci-joint**](./rapport/Rapport-RetailOps.pdf)
 ____
 > #### Projet de groupe - Master IA/Data
-> Esperence DAYE
-> Mathieu RAMAANTSALAMA
-> Hugo SUSCOSSE
+> Esperence DAYE  
+> Mathieu RAMAANTSALAMA  
+> Hugo SUSCOSSE  
 > Mickael GAILLARD
